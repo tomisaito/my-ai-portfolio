@@ -1,6 +1,4 @@
----
 :globe_with_meridians: **Languages** | [English](./README.md) | [日本語](./README_JP.md)
----
 
 # Hand Gesture Classifier
 
