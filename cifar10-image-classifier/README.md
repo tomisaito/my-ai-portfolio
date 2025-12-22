@@ -1,3 +1,5 @@
+"Note: This project is part of my my-ai-portfolio repository."
+
 # 🖼️ CIFAR-10 Image Classifier
 
 A deep learning-powered image classification API built with PyTorch and FastAPI.
@@ -75,8 +77,8 @@ it is packaged correctly when deploying on Hugging Face Spaces with Docker.
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/tomisaito/my-ai-portfolio/cifar10-image-classifier.git
-cd cifar10-image-classifier
+git clone https://github.com/tomisaito/my-ai-portfolio.git
+cd my-ai-portfolio/cifar10-image-classifier
 ```
 
 ### 2. Install dependencies
