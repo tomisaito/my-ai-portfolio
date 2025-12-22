@@ -33,7 +33,7 @@ The model predicts one of the following 10 classes:
 ## 📂 Project Structure
 
 ```text
-cifar10-classifier/
+cifar10-image-classifier/
     app/
         main.py
         model.py
@@ -42,10 +42,12 @@ cifar10-classifier/
         demo_result.png
     notebooks/
         training.ipynb
-    Dockerfile
-    requirements.txt
-    README.md
+    test_images/cat.jpg
     .gitignore
+    Dockerfile
+    LICENSE
+    README.md
+    requirements.txt
 ```
 
 ## 🧠 Model Description
@@ -81,19 +83,33 @@ git clone https://github.com/tomisaito/my-ai-portfolio.git
 cd my-ai-portfolio/cifar10-image-classifier
 ```
 
-### 2. Install dependencies
+### 2. Create and Activate Virtual Environment
+
+It is recommended to use a virtual environment to avoid conflicts.
+
+```bash
+# Windows (PowerShell)
+python -m venv venv
+.\venv\Scripts\activate
+
+# Mac / Linux / Git Bash
+python -m venv venv
+source venv/bin/activate
+```
+
+### 3. Install dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 3. Run FastAPI server locally
+### 4. Run FastAPI server locally
 
 ```bash
 uvicorn app.main:app --host 0.0.0.0 --port 8000
 ```
 
-### 4. Access the API
+### 5. Access the API
 
 * OpenAPI Docs: [http://localhost:8000/docs](http://localhost:8000/docs)
 * Predict endpoint: `POST http://localhost:8000/predict`
@@ -102,12 +118,13 @@ uvicorn app.main:app --host 0.0.0.0 --port 8000
 
 ### cURL Example
 
+Run the following command in your terminal. Ensure the server is running.
+
 ```bash
-curl -X POST "http://localhost:8000/predict" \
-  -H "accept: application/json" \
-  -H "Content-Type: multipart/form-data" \
-  -F "file=@cat.jpg"
+curl -X POST "http://localhost:8000/predict" -F "file=@test_images/cat.jpg"
 ```
+
+Note: For Windows PowerShell, you may need to use curl.exe instead of curl.
 
 ### Python Example
 
@@ -116,7 +133,7 @@ import requests
 
 url = "http://localhost:8000/predict"
 
-with open("cat.jpg", "rb") as f:
+with open("test_images/cat.jpg", "rb") as f:
     files = {"file": f}
     response = requests.post(url, files=files)
 
@@ -127,12 +144,21 @@ print(response.json())
 
 ```json
 {
+  "status": "success",
   "predicted_class": "cat",
-  "confidence": 0.8542,
+  "confidence": 0.768,
+  "image_size": [128, 128],
   "all_probabilities": {
-    "airplane": 0.01,
-    "automobile": 0.02,
-    "bird": 0.03
+    "airplane": 0.0013,
+    "automobile": 0.0002,
+    "bird": 0.0050,
+    "cat": 0.7680,
+    "deer": 0.0017,
+    "dog": 0.2080,
+    "frog": 0.0003,
+    "horse": 0.0113,
+    "ship": 0.0041,
+    "truck": 0.0001
   }
 }
 ```
@@ -167,9 +193,6 @@ git commit -m "Deploy CIFAR-10 classifier"
 git push
 ```
 
-Your API will be deployed at:
-`https://huggingface.co/spaces/tomisaito/cifar10-classifier`
-
 ## 📈 Model Performance
 
 | Metric            | Value            |
@@ -183,8 +206,7 @@ Your API will be deployed at:
 ## 🧪 Testing
 
 ```bash
-curl -X POST "http://localhost:8000/predict" \
-  -F "file=@test_images/cat.jpg"
+curl -X POST "http://localhost:8000/predict" -F "file=@test_images/cat.jpg"
 ```
 
 ## 📈 Future Improvements

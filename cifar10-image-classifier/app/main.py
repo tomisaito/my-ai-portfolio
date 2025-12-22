@@ -110,8 +110,10 @@ async def predict(file: UploadFile = File(...)):
 
     return {
         "predicted_class": CIFAR10_CLASSES[top_class.item()],
-        "confidence": float(top_prob),
-        "all_probabilities": { CIFAR10_CLASSES[i]: float(probabilities[i]) for i in range(len(CIFAR10_CLASSES)) },
+        "confidence": round(float(top_prob), 4),
+        "all_probabilities": { 
+            CIFAR10_CLASSES[i]: round(float(probabilities[i]), 4) for i in range(len(CIFAR10_CLASSES)) 
+        },
         "image_size": original_size,
         "status": "success"
     }
