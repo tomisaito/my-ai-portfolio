@@ -79,6 +79,8 @@
 
 ## 主な設計上の判断（Key Design Decisions）
 
+![Inference Comparison](comparison.jpg)
+
 ### 1. センタークロップの代わりにレターボックスパディングを採用
 
 #### 課題（Problem）

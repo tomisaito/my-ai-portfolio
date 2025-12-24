@@ -78,6 +78,8 @@ This diversity was introduced to improve robustness under realistic usage scenar
 
 ## Key Design Decisions
 
+![Inference Comparison](comparison.jpg)
+
 ### 1. Letterbox Padding Instead of Center Crop
 
 #### Problem
